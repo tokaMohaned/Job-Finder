@@ -5,8 +5,11 @@ import 'package:graduationroject/view/pages/Done_pages/register_don_page.dart';
 import 'package:graduationroject/view/pages/Done_pages/reset_done.dart';
 import 'package:graduationroject/view/pages/Login.dart';
 import 'package:graduationroject/view/pages/OnBoard.dart';
+import 'package:graduationroject/view/pages/change_password.dart';
 import 'package:graduationroject/view/pages/forget_password.dart';
 import 'package:graduationroject/view/pages/homeScreen.dart';
+import 'package:graduationroject/view/pages/main_emailAdress.dart';
+import 'package:graduationroject/view/pages/phone_number.dart';
 import 'package:graduationroject/view/pages/prefered_location.dart';
 import 'package:graduationroject/view/pages/register.dart';
 import 'package:graduationroject/view/pages/splash.dart';
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
           // theme: ThemeData(
           //   primarySwatch: Colors.blue,
           // ),
-          initialRoute:  Work_Type.routName,//first page will apear
+          initialRoute:  ChangePassword.routName,//first page will apear
           routes: {
             SplashScreen.routName:(context)=>SplashScreen(),
             OnBoardScreen.routName:(context)=>OnBoardScreen(),
@@ -58,6 +61,17 @@ class MyApp extends StatelessWidget {
             ForgetPasswordDone_page.routName:(context)=>ForgetPasswordDone_page(),
             Rest_password.routName:(context)=>Rest_password(),
             DoneResetPass.routName:(context)=>DoneResetPass(),
+
+            MainEmailAdress.routName:(context)=>MainEmailAdress(),
+            Phone_number.routName:(context)=>Phone_number(),
+            ChangePassword.routName:(context)=>ChangePassword(),
+
+
+
+
+
+
+
 
 
 
