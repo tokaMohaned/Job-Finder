@@ -42,8 +42,11 @@ class MyApp extends StatelessWidget {
           // theme: ThemeData(
           //   primarySwatch: Colors.blue,
           // ),
-          initialRoute:  ChangePassword.routName,//first page will apear
+          initialRoute:  Prefered_location.routName,//first page will apear
           routes: {
+           // test.routName:(context)=>test(),
+
+
             SplashScreen.routName:(context)=>SplashScreen(),
             OnBoardScreen.routName:(context)=>OnBoardScreen(),
 
