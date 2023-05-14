@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utilites/AppAssets.dart';
-import '../customeWidget/defaulit_form_field.dart';
-import '../customeWidget/main_button.dart';
-import 'Done_pages/forget_password_done_page.dart';
-import 'Login.dart';
+import '../../../utilites/AppAssets.dart';
+import '../../customeWidget/defaulit_form_field.dart';
+import '../../customeWidget/main_button.dart';
+import '../Done_pages/forget_password_done_page.dart';
+import '../Login.dart';
 
 class ForgetPassword extends StatelessWidget {
   static const String routName = "ForgetPassword";

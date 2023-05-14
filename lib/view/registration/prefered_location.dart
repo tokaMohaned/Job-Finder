@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../utilites/AppAssets.dart';
 import '../customeWidget/main_button.dart';
-import 'Done_pages/register_don_page.dart';
+import '../pages/Done_pages/register_don_page.dart';
 
 class Prefered_location extends StatefulWidget {
   static const String routName="Prefered_location";

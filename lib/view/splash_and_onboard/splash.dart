@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graduationroject/view/pages/OnBoard.dart';
+import 'package:graduationroject/view/splash_and_onboard/OnBoard.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routName = "SplashScreen";
