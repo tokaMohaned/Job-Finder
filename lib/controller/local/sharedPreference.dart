@@ -17,6 +17,7 @@ class MyCache {
 
   static String getString({required MyCacheKeys key,}) {
     return preferences?.getString(key.name,) ?? '';
+    //it mean if ther is no data put empty string
   }
 
   static void putBoolean(

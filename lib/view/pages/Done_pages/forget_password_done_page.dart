@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../customeWidget/Done_page.dart';
 import '../../customeWidget/main_button.dart';
-import '../Login.dart';
+import '../../registration_and_login/Login.dart';
 import '../reset_password/reset_password.dart';
 
 class ForgetPasswordDone_page extends StatelessWidget {

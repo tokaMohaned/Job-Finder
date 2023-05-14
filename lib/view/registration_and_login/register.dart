@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduationroject/view/registration_and_login/work_type.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controller/local/sharedPreference.dart';
@@ -7,7 +8,7 @@ import '../../utilites/AppAssets.dart';
 import '../../utilites/enums.dart';
 import '../customeWidget/defaulit_form_field.dart';
 import '../customeWidget/main_button.dart';
-import '../pages/Login.dart';
+import 'Login.dart';
 import '../pages/homeScreen.dart';
 
 class RegitrationScreen extends StatefulWidget {
@@ -120,9 +121,7 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
+                  SizedBox(height: 1.h,),
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -249,7 +248,7 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
                             key: MyCacheKeys.password,
                             value: passwordController.text);
                       }
-                      Navigator.pushNamed(context, HomeScreen.routName);
+                      Navigator.pushNamed(context, Work_Type.routName);
                       print(emailController);
                     },
                     text: 'Create account',
@@ -281,36 +280,30 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
                           )),
                     ),
                   ]),
+
                   Row(children: [
                     InkWell(
-                      child: Image(
+                      onTap: ()
+                      {
+
+                      },
+                      child: const Image(
                         image: AssetImage(AppAssets.googleIcon),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
 
-                    InkWell(
+                    const InkWell(
                         child: Image(
                       image: AssetImage(AppAssets.facebookIcon),
                     )),
 
-                    // Container( width: 154,
-                    //   child: ElevatedButton(
-                    //     onPressed: (){},
-                    //     child: ImageIcon(
-                    //       AssetImage(AppAssets.facebookIcon),
-                    //
-                    //     ) ),
-                    // ),
-                    // const Spacer(),
 
-                    // ElevatedButton(
-                    //     onPressed: (){},
-                    //     child: ImageIcon(
-                    //       AssetImage("assets/images/facebook icon.png"),),),
                   ]),
+                  SizedBox(height: 2.h,)
                 ], //chelderen of column
               ),
+
             ),
           ),
         ),

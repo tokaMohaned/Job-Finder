@@ -19,8 +19,21 @@ class Prefered_location extends StatefulWidget {
 class _Prefered_locationState extends State<Prefered_location> {
   @override
   Widget build(BuildContext context) {
+    List<String> tabList=[
+      "work form office",
+      "remote work"
+    ];
+    Color containerColor=Colors.grey;
+    void changeColor() {
+      setState(() {
+        containerColor = Colors.blue;
+      });
+    }
+
+
     bool isremote=false;
-    int selct=0;
+    bool fromOffice=false;
+
     bool isPressed=false;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -44,81 +57,145 @@ class _Prefered_locationState extends State<Prefered_location> {
             SizedBox(height: 2.h,),
 
             Container(
-             // alignment: Alignment.center,
-              //width: 3.w,
-              height: 4.h,
+              width: 327, // set the width of the parent container
+              height: 46,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-               // color: Color(0xfFF4F4F5)
-                color: Colors.red
-
-              ),
+                 color: Color(0xffF4F4F5),
+              ),// set the height of the parent container
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center
-                ,
-                //mainAxisSize: MainAxisSize.min,
-
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Flex(direction: Axis.horizontal,
-                    children:[ Container(
-                      width:MediaQuery.of(context).size.width*.05,
-                      color: isremote?Colors.blue:Colors.grey,
-                    child: InkWell(
-                        onTap: (){
-                          isremote=true;
-                          setState(() {
+                  InkWell(
+                    onTap: () {
+                      //changeColor();
+                      setState(() {
+                        Tabs.tabsList[0].selected= Tabs.tabsList[0].selected;
 
-                          });
-                             // if(remote==false)
-                             //   {
-                             //
-                             //   }
-                        },
-                        child: Text("Work From Office")),
-                    ),]
+                      });
+                      // handle onTap for the first child container
+                    },
+                    child: Container(
+                      width: 160, // set the width of the first child container
+                      height: 40,
+                      alignment: Alignment.center,// set the height of the first child container
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Tabs.tabsList[0].selected?Colors.grey:Color(0xff091A7A),
+                      ),
+                      child: Text(tabList[0],style:
+                        TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                        ),),// set the background color of the first child container
+                    ),
                   ),
+                  InkWell(
+                    onTap: () {
+                     // changeColor();
+                      //containerColor;
+                      setState(() {
+                        Tabs.tabsList[1].selected= Tabs.tabsList[1].selected;
 
-                  Flex(
-                    direction: Axis.horizontal,
-                    children: [Container(//
-                      //width: MediaQuery.of(context).size.,
-                      color: isremote?Colors.grey:Colors.blue,
+                      });
 
-                      child: InkWell(
-                          onTap: (){
-                            isremote=false;
-                            setState(() {
+                      // handle onTap for the second child container
+                    },
+                    child: Container(
+                      width: 160, // set the width of the second child container
+                      height: 40,
+                      alignment: Alignment.center,// set the height of the second child container
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Tabs.tabsList[1].selected?Colors.grey:Color(0xff091A7A),
+                      ),// set the background color of the second child container
+                      child: Text(tabList[1],style:
+                            TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),)// set the background color of the first child container
 
-                            });
-
-                          },
-                          child: Text("Remote Work")),
-                    ),]
-                  )
-
-                  //   InkWell(
-                  //
-                  //      child:
-                  //
-                  //      Chip(
-                  //       label: Text("Work From Office",style: TextStyle(
-                  //         fontSize: 14.sp,
-                  //         color: isPressed? Color(0xfFFFFFF): Color(0xfF6B7280),
-                  //       ),),
-                  //       backgroundColor:isPressed? Color(0xfF4F4F5):Color(0xfF091A7A) ,
-                  //     ),
-                  //   ),
-                  // Chip(
-                  //   label: Text("Remote Work",style: TextStyle(
-                  //     fontSize: 14.sp,
-                  //
-                  //   ),),
-                  //   backgroundColor:Color(0xfFF4F4F5) ,
-                  // ),
+                    ),
+                  ),
                 ],
               ),
             ),
+
+            // Container(
+            //  // alignment: Alignment.center,
+            //   //width: 3.w,
+            //   height: 4.h,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(20),
+            //    // color: Color(0xfFF4F4F5)
+            //     color: Colors.red
+            //
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center
+            //     ,
+            //     //mainAxisSize: MainAxisSize.min,
+            //
+            //     children: [
+            //       Flex(direction: Axis.horizontal,
+            //         children:[ Container(
+            //           width:MediaQuery.of(context).size.width*.05,
+            //           color: isremote?Colors.blue:Colors.grey,
+            //         child: InkWell(
+            //             onTap: (){
+            //               isremote=true;
+            //               setState(() {
+            //
+            //               });
+            //                  // if(remote==false)
+            //                  //   {
+            //                  //
+            //                  //   }
+            //             },
+            //             child: Text("Work From Office")),
+            //         ),]
+            //       ),
+            //
+            //       Flex(
+            //         direction: Axis.horizontal,
+            //         children: [Container(//
+            //           //width: MediaQuery.of(context).size.,
+            //           color: isremote?Colors.grey:Colors.blue,
+            //
+            //           child: InkWell(
+            //               onTap: (){
+            //                 isremote=!isremote;
+            //                 setState(() {
+            //
+            //                 });
+            //
+            //               },
+            //               child: Text("Remote Work")),
+            //         ),]
+            //       )
+            //
+            //       //   InkWell(
+            //       //
+            //       //      child:
+            //       //
+            //       //      Chip(
+            //       //       label: Text("Work From Office",style: TextStyle(
+            //       //         fontSize: 14.sp,
+            //       //         color: isPressed? Color(0xfFFFFFF): Color(0xfF6B7280),
+            //       //       ),),
+            //       //       backgroundColor:isPressed? Color(0xfF4F4F5):Color(0xfF091A7A) ,
+            //       //     ),
+            //       //   ),
+            //       // Chip(
+            //       //   label: Text("Remote Work",style: TextStyle(
+            //       //     fontSize: 14.sp,
+            //       //
+            //       //   ),),
+            //       //   backgroundColor:Color(0xfFF4F4F5) ,
+            //       // ),
+            //     ],
+            //   ),
+            // ),
             SizedBox(height: 2.h,),
             Text("Select the country you want for your job",style:
               TextStyle(
@@ -191,13 +268,17 @@ class _Prefered_locationState extends State<Prefered_location> {
                             setState(() {
 
                             Location.locationList[index].selected=!Location.locationList[index].selected;
-                            if(Location.locationList[index].selected==true)
-                            {
-                              selct++;
-                              print(selct);
-                              isPressed=true;
 
-                            }
+                            isPressed=!isPressed;
+
+
+                            // if(Location.locationList[index].selected==true)
+                            // {
+                            //   selct++;
+                            //   print(selct);
+                            //   isPressed=true;
+                            //
+                            // }
 
                             //isPressed=!isPressed;
                            // print("done");
@@ -244,11 +325,10 @@ class _Prefered_locationState extends State<Prefered_location> {
             SizedBox(height: .05.h,),
             MainButton(text: 'Next',
               onTap: () {
-                setState(() {///الشرط محتاج يتظبطت
-                  if(isPressed)
-                  {
-                    Navigator.pushNamed(context, Register_Done_page.routName);
-                  }
+                Navigator.pushNamed(context, Register_Done_page.routName);
+
+                setState(() {///
+
                 });
 
               },),
@@ -336,4 +416,17 @@ Location? location;
       ],
     );
   }
+
+
+}
+
+class Tabs{
+  final String text;
+  bool selected;
+  Tabs({ required this.text,required this.selected});
+  static List<Tabs>tabsList= <Tabs>
+  [
+  Tabs(text:"work from Office",selected: false),
+  Tabs(text:"remote work",selected: false),
+  ];
 }

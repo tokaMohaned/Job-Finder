@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../customeWidget/Done_page.dart';
-import '../Login.dart';
+import '../../registration_and_login/Login.dart';
 import '../homeScreen.dart';
 
 class Register_Done_page extends StatelessWidget {

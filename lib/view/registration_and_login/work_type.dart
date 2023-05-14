@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationroject/view/customeWidget/main_button.dart';
-import 'package:graduationroject/view/registration/prefered_location.dart';
+import 'package:graduationroject/view/registration_and_login/prefered_location.dart';
 import 'package:sizer/sizer.dart';
 import '../../utilites/AppAssets.dart';
 
