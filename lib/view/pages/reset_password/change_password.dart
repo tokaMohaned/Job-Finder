@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../utilites/AppAssets.dart';
-import '../customeWidget/defaulit_form_field.dart';
-import '../customeWidget/main_button.dart';
-import 'Done_pages/reset_done.dart';
+import '../../../utilites/AppAssets.dart';
+import '../../customeWidget/defaulit_form_field.dart';
+import '../../customeWidget/main_button.dart';
+import '../Done_pages/reset_done.dart';
 
 class ChangePassword extends StatelessWidget {
   static const String routName = "ChangePassword";

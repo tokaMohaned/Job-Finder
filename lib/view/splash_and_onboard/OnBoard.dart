@@ -7,7 +7,7 @@ import 'package:graduationroject/utilites/enums.dart';
 import 'package:graduationroject/view/customeWidget/default_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../utilites/appStirng.dart';
-import 'Login.dart';
+import '../pages/Login.dart';
 
 class OnBoardScreen extends StatefulWidget {
   static const String routName = "OnBoard";

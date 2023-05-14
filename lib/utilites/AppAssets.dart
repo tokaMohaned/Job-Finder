@@ -10,6 +10,11 @@ class AppAssets{
 
   static const String homeIndicator = 'assets/images/Home Indicator.png';
 
+  static const String googleIcon="assets/images/Button.png";
+  static const String facebookIcon="assets/images/facebook icon.png";
+
+
+
   static const String works1 = 'assets/images/bezier.png';
   static const String works2 = 'assets/images/works2.jpeg';
   static const String works3 = 'assets/images/works3.jpeg';

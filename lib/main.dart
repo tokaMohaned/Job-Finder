@@ -4,17 +4,18 @@ import 'package:graduationroject/view/pages/Done_pages/forget_password_done_page
 import 'package:graduationroject/view/pages/Done_pages/register_don_page.dart';
 import 'package:graduationroject/view/pages/Done_pages/reset_done.dart';
 import 'package:graduationroject/view/pages/Login.dart';
-import 'package:graduationroject/view/pages/OnBoard.dart';
-import 'package:graduationroject/view/pages/change_password.dart';
-import 'package:graduationroject/view/pages/forget_password.dart';
+import 'package:graduationroject/view/splash_and_onboard/OnBoard.dart';
+import 'package:graduationroject/view/pages/reset_password/change_password.dart';
+import 'package:graduationroject/view/pages/reset_password/forget_password.dart';
 import 'package:graduationroject/view/pages/homeScreen.dart';
-import 'package:graduationroject/view/pages/main_emailAdress.dart';
-import 'package:graduationroject/view/pages/phone_number.dart';
-import 'package:graduationroject/view/pages/prefered_location.dart';
-import 'package:graduationroject/view/pages/register.dart';
-import 'package:graduationroject/view/pages/splash.dart';
-import 'package:graduationroject/view/pages/reset_password.dart';
-import 'package:graduationroject/view/pages/work_type.dart';
+import 'package:graduationroject/view/pages/reset_password/main_emailAdress.dart';
+import 'package:graduationroject/view/registration/phone_number.dart';
+import 'package:graduationroject/view/pages/reset_password/reset_password.dart';
+import 'package:graduationroject/view/registration/prefered_location.dart';
+import 'package:graduationroject/view/registration/register.dart';
+import 'package:graduationroject/view/splash_and_onboard/splash.dart';
+import 'package:graduationroject/view/registration/work_type.dart';
+
 import 'package:sizer/sizer.dart';
 
 void main()
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
           // theme: ThemeData(
           //   primarySwatch: Colors.blue,
           // ),
-          initialRoute:  Prefered_location.routName,//first page will apear
+          initialRoute:  RegitrationScreen.routName,//first page will apear
           routes: {
            // test.routName:(context)=>test(),
 
