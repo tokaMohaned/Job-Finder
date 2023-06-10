@@ -15,6 +15,11 @@ class GetJobsSuccessState extends JobsStates{}
 class loginLoadingsState extends JobsStates{}
 
 class LoginSuccessState extends JobsStates{}
+class LoginErrorState extends JobsStates{}
+
+class RegisterSeccessState extends JobsStates{}
+class RegisterErrorState extends JobsStates{}
+
 class searchState extends JobsStates{}
 
 // class NewsGetLoadingsState extends JobsStates{}

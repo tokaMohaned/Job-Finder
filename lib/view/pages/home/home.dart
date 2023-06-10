@@ -80,7 +80,8 @@ class HomePage extends StatelessWidget {
                             ),
                             child: IconButton(
                                 onPressed: () {
-                                  navigateTo(context,  NotificationPage());
+                                 // navigateTo(context,  NotificationPage());
+                                //  Navigator.pushNamed(context, NotificationPage)
                                 },
                                 icon: const Icon(Icons.notifications_none_outlined)),
                           ),
@@ -91,7 +92,7 @@ class HomePage extends StatelessWidget {
                       /// search bar
                       InkWell(
                         onTap: () {
-                          navigateTo(context, SearchScreen());
+                          //navigateTo(context, SearchScreen());
                         },
                         child: Container(
                           padding: EdgeInsets.fromLTRB(12, 14, 26, 10),
@@ -158,7 +159,7 @@ class HomePage extends StatelessWidget {
                               itemCount: list.length,
                               itemBuilder: (context, index) => InkWell(
                                 onTap: () {
-                                  navigateTo(context, JobDetail(jobsindex:index));
+                                  //navigateTo(context, JobDetail(jobsindex:index));
                                 },
                                 child:
                                 customSuggestedJobsList(list[index], context),
@@ -197,12 +198,16 @@ class HomePage extends StatelessWidget {
                             builder: (context) => ListView.separated(
                               physics: BouncingScrollPhysics(),
                               separatorBuilder: (context, index) =>
-                                  defaultSeparatorContainer(),
+                              Container(
+                                width: double.infinity,
+                                height: 4,
+                                color: Colors.grey[300],
+                              ),
                               itemCount: list.length,
                               itemBuilder: (context, index) =>
                                   InkWell(
                                     onTap: () {
-                                      navigateTo(context, JobDetail(jobsindex:index));
+                                      //navigateTo(context, JobDetail(jobsindex:index));
                                     },
                                     child:
                                     customJobsList(list[index], context),
@@ -230,7 +235,7 @@ Widget customSuggestedJobsList(list, BuildContext context) {
         color: Colors.grey,
       ),
       borderRadius: BorderRadius.circular(15),
-      color: cardPrimaryColor,
+      color: Color(0xFF091A7A),
     ),
     child: Column(
       children: [

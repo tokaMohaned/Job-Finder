@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../controller/logic/cubit/job_cubit.dart';
 import '../../../controller/logic/cubit/job_state.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {//this class for bottomNavigation bar of home
   static const String routName = "HomeScreen";
 
   @override
@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           body: cubit.Screans[cubit.currentIndexs],
 
-          ///  Navigation Bar
+          ///  bottomNavigation Bar
           bottomNavigationBar: BottomNavigationBar(
             showUnselectedLabels: true,
             selectedItemColor: const Color(0xFF3366FF),

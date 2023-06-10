@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
               // theme: ThemeData(
               //   primarySwatch: Colors.blue,
               // ),
-              initialRoute: HomeScreen.routName, //first page will apear
+              initialRoute: LoginScreen.routName, //first page will appear
               routes: {
                 // test.routName:(context)=>test(),
 
