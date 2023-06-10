@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../customeWidget/Done_page.dart';
 import '../../registration_and_login/Login.dart';
-import '../homeScreen.dart';
+import '../home/homeScreen.dart';
 
 class Register_Done_page extends StatelessWidget {
   static const String routName="Register_Done_page";

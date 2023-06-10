@@ -9,7 +9,7 @@ import '../customeWidget/customtTextFormField.dart';
 import '../customeWidget/defaulit_form_field.dart';
 import '../customeWidget/main_button.dart';
 import 'register.dart';
-import '../pages/homeScreen.dart';
+import '../pages/home/homeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = "loginScreen";

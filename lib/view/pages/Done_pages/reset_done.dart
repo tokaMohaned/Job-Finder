@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../customeWidget/Done_page.dart';
-import '../homeScreen.dart';
+import '../home/homeScreen.dart';
 
 class DoneResetPass extends StatelessWidget {
   static const String routName = "DoneResetPass";

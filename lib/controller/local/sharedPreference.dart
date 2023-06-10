@@ -10,6 +10,18 @@ class MyCache {
     preferences = await SharedPreferences.getInstance();
   }
 
+  static Future<bool?> saveData({required String key, required dynamic value})async
+  {
+    if(value is String ) return await preferences?.setString(key, value);
+    if(value is int ) return await preferences?.setInt(key, value);
+    if(value is bool ) return await preferences?.setBool(key, value);
+   else return await preferences?.setDouble(key, value);
+  }
+
+  static dynamic getData({required String key})
+  {
+    return preferences?.get(key);
+  }
   static void putString(
       {required MyCacheKeys key, required String value}) async {
     await preferences?.setString(key.name, value);

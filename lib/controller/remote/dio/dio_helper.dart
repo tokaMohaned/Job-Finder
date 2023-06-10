@@ -19,7 +19,7 @@ class DioHelper {
    ) ;
   }
 
- static Future<Response> getData
+ static Future<dynamic> getData
      ({
      required String url,
     Map<String,dynamic>?queryParameters,//it is optional
