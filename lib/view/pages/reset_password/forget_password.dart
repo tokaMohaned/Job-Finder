@@ -6,7 +6,7 @@ import '../../../utilites/AppAssets.dart';
 import '../../customeWidget/defaulit_form_field.dart';
 import '../../customeWidget/main_button.dart';
 import '../Done_pages/forget_password_done_page.dart';
-import '../Login.dart';
+import '../../registration_and_login/Login.dart';
 
 class ForgetPassword extends StatelessWidget {
   static const String routName = "ForgetPassword";

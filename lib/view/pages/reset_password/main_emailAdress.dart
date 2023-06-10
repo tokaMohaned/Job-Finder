@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graduationroject/view/registration/phone_number.dart';
 import 'package:sizer/sizer.dart';
 import '../../customeWidget/defaulit_form_field.dart';
 import '../../customeWidget/main_button.dart';
@@ -79,7 +78,7 @@ class MainEmailAdress extends StatelessWidget {
               onTap: () {
                 if(formKey.currentState!.validate())
                 {
-                  Navigator.pushNamed(context, Phone_number.routName);
+                  //Navigator.pushNamed(context, Phone_number.routName);
                   print(emailController);
                 }
               },),

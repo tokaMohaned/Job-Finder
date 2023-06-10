@@ -7,7 +7,7 @@ import 'package:graduationroject/utilites/enums.dart';
 import 'package:graduationroject/view/customeWidget/default_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../utilites/appStirng.dart';
-import '../pages/Login.dart';
+import '../registration_and_login/Login.dart';
 
 class OnBoardScreen extends StatefulWidget {
   static const String routName = "OnBoard";
@@ -61,7 +61,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             ),
             onPressed: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+                  MaterialPageRoute(builder: (context) =>  LoginScreen()));
 
               finishOnBoarding(context, LoginScreen.routName);
             },
@@ -127,7 +127,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreen()));
+                              builder: (context) =>  LoginScreen()));
                     }
                                 else { {
                       isLast = false;
