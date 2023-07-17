@@ -1,4 +1,6 @@
 
+//import 'dart:html';
+
 import 'package:dio/dio.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,7 @@ import '../../../view/pages/screens/Job_application.dart';
 import '../../../view/pages/screens/contact_page.dart';
 import '../../../view/pages/screens/profile.dart';
 import '../../../view/pages/screens/saved_jobs.dart';
+import '../../../view/registration_and_login/register.dart';
 import '../../local/sharedPreference.dart';
 import 'job_state.dart';
 
@@ -56,21 +59,21 @@ class JobCubit extends Cubit<JobsStates> {
 
   void changeIndexBtmNav(int index) {
     currentIndexs = index;
-    emit(NewsNtmNavState());
+    emit(NavBarState());
     if(index==3){
       DioHelper.getSavedJobs(MyCache.getData(key: 'id'));
     }
-    emit(NewsNtmNavState());
+    emit(NavBarState());
   }
   /////////////////////////////////////////
 //git the jobs
-  List<jobsModel> jobsList = [];
+  List<JobModel> jobsList = [];
   Future<List> getAllJobs() async {
 
     List<dynamic> dataDio=await DioHelper.getData(url: 'http:/167.71.79.133/api/jobs');
     //List<dynamic> data = await Api().get(url:'http://167.71.79.133/api/jobs');
-    List<jobsModel> jobs = dataDio.map((job) =>
-        jobsModel.fromJson(job)).toList();
+    List<JobModel> jobs = dataDio.map((job) =>
+        JobModel.fromJson(job)).toList();
 
     jobsList = jobs;
     emit(GetJobsSuccessState());
@@ -83,7 +86,7 @@ class JobCubit extends Cubit<JobsStates> {
   String? token;
   final dioHelper=DioHelper();
 
-  Future<void> login(email,password,context) async {
+    Future<void> login(email,password,context) async {
     String url = " http://167.71.79.133/api/auth/login";
     emit(loginLoadingsState());
     try{
@@ -139,7 +142,7 @@ void showToast( context) {
     }
     catch(error)
     {
-      showRegisterToast(context);
+      showToastWhenRegister(context);
       emit(RegisterErrorState());
     }
   }
@@ -157,14 +160,41 @@ void showToast( context) {
       )
     ));
   }
-  //////////////saved job
+  //////////////  saved job
+  var newJobId;
+  Future<void> saveJobs(jobId, id , token) async
+  {
+    String url="http://167.71.79.133/api/favorites";
+    var dio=Dio();
+    try{
+      Response response=await dio.post(url,data:{'job_id': jobId, 'user_id': id});
+      //Response response = await networkService.postData(url, {'job_id': jobId, 'user_id': id});
+      MyCache.saveData(key: 'newJobId',
+          value: response.data['data']['id']);
+      newJobId=MyCache.getData(key: 'newJobID');
 
+    }
+    catch(error)
+    {
+      print(error.toString());
+    }
+  }
   ///////////get saved jobs list
+  List<JobModel> saveJobList=[];
+  Future <List> getSavedJobes(id) async
+  {
+    List<dynamic> data= await DioHelper.getData(url: 'http://167.71.79.133/api/favorites/$id');
+    List<JobModel> jobs=
+    data.map((job) => JobModel.fromJson(job)).toList();
+    saveJobList=jobs;
+    emit(GetSavedJobsSeccessState());
+    return jobs;
+  }
   //////////deletJob
 /////////////////edit profile
 /////////////////////updateProfile
 /////////////////////searchList
-  List<jobsModel> searchList = [];
+  List<JobModel> searchList = [];
   void searchJobs(String query) {
     // if (query==0){
     //   searchList=[];

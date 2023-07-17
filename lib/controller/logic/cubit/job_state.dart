@@ -8,7 +8,7 @@ abstract class JobsStates {}
 
 class NewsInitialState extends JobsStates{}
 
-class NewsNtmNavState extends JobsStates{}
+class NavBarState extends JobsStates{}
 
 class GetJobsSuccessState extends JobsStates{}
 
@@ -21,6 +21,11 @@ class RegisterSeccessState extends JobsStates{}
 class RegisterErrorState extends JobsStates{}
 
 class searchState extends JobsStates{}
+
+class GetSavedJobsSeccessState extends JobsStates{}
+
+
+
 
 // class NewsGetLoadingsState extends JobsStates{}
 //

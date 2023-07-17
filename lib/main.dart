@@ -48,13 +48,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => JobCubit()..getAllJobs(),
+      create: (_) => JobCubit()..currentIndexs,
       //2 dots mean i make obj and call function
       child: Sizer(
           builder: (context, orientation, deviceType) {
             return MaterialApp(
+              //useInheritedMediaQuery: true,
+             locale: DevicePreview.locale(context),
+              builder: DevicePreview.appBuilder,
               debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
+              //title: 'Flutter Demo',
               // theme: ThemeData(
               //   primarySwatch: Colors.blue,
               // ),

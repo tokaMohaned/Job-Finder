@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class RegitrationScreen extends StatefulWidget {
 
 class _RegitrationScreenState extends State<RegitrationScreen> {
   bool ispressed = false;
+  bool obsecureText=true;
   var userNameController =
   TextEditingController(text: MyCache.getString(key: MyCacheKeys.name));
 
@@ -38,11 +40,12 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
   var formKey = GlobalKey<FormState>();
 
   @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   checkConnectivity(context);
-  // }
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkConnectivity(context);
+  }
+
   Widget build(BuildContext context) {
     return BlocConsumer<JobCubit, JobsStates>(
       listener: (context, state) {
@@ -57,6 +60,19 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
             {
               cubit.register(name,email, password,context);
             }
+          else{
+            showDialog(context: context, builder: (context)=>
+            AlertDialog(
+              title: Text('error'),
+              content: Text('username or password is worng'),
+              actions: [
+                TextButton(onPressed:()
+                {Navigator.pop(context);},
+                    child: Text('ok')),
+              ],
+            )
+            );
+          }
         }
         return Scaffold(
           appBar: AppBar(
@@ -163,6 +179,7 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
                             }
                           },
                           controller: emailController,
+
                           keyboardType: TextInputType.emailAddress,
                           labelText: "Email",
                           prefixIcon: const Icon(Icons.email_outlined),
@@ -264,6 +281,9 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
 
                       MainButton(
                         onTap: () {
+                          register(userNameController.text, emailController.text, passwordController.text);
+
+
                           if (formKey.currentState!.validate()) {
                             MyCache.putString(
                                 key: MyCacheKeys.email,
@@ -306,7 +326,7 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
                       ]),
 
                       Row(children: [
-                        InkWell(
+                        GestureDetector(//it is looks like inkwell
                           onTap: () {
 
                           },
@@ -316,7 +336,7 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
                         ),
                         const Spacer(),
 
-                        const InkWell(
+                         GestureDetector(
                             child: Image(
                               image: AssetImage(AppAssets.facebookIcon),
                             )),
@@ -335,4 +355,42 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
       },
     );
   }
+
+  checkConnectivity(BuildContext context) async
+  {
+    var result=await Connectivity().checkConnectivity();
+    print('connection type => ${result.name}');
+    if(result.name!= 'none')
+    {
+
+    }
+    else{
+      internetConnection(context);
+    }
+  }
+
+  void internetConnection(context)
+  {
+    final scaffold= ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(SnackBar(
+      content: Text('No internet connction',
+        style:TextStyle(fontSize: 12.sp) , ),
+      action: SnackBarAction(label: 'ok',onPressed: scaffold.hideCurrentSnackBar,),
+
+    ));
+  }
+
+
+}
+void showToastWhenRegister(context)
+{
+  final scaffold= ScaffoldMessenger.of(context);
+  scaffold.showSnackBar(SnackBar(
+    content: Text('email or password is not valid',
+      style: TextStyle(fontSize: 12.sp),),
+    action: SnackBarAction(
+      label: 'ok',
+      onPressed: scaffold.hideCurrentSnackBar,
+    ),
+  ));
 }
