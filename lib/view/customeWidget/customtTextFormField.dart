@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  late String image;
+   String? image;
   late String hintText;
   late bool obsecuretext;
   IconButton? suffixIcon;
@@ -11,7 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   TextEditingController? controller = TextEditingController();
 
   CustomTextFormField(
-      {required this.image,
+      { this.image,
       required this.hintText,
       this.obsecuretext = false,
       this.suffixIcon,
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
           suffixIcon: suffixIcon,
           prefixIcon: ImageIcon(
-            AssetImage(image),
+            AssetImage(image!),
           ),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

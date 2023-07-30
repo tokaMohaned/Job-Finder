@@ -5,18 +5,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:graduationroject/controller/logic/cubit/job_state.dart';
+import 'package:graduationroject/view/search_screen/searchScreen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../controller/logic/cubit/job_cubit.dart';
+import '../../registration_and_login/register.dart';
+import 'BottomNavBar.dart';
 
-
-class HomePage extends StatelessWidget {
+//
+class HomePage extends StatefulWidget {
   static const String routName = "HomePage";
 
-  // HomeScreen({Key? key}) : super(key: key);
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  // HomeScreen({Key? key}) : super(key: key);
   var list = [];
+
   var name ;
+  bool isSaved=false;
+
+  void initState()
+  {
+    super.initState();
+    checkConnectivity(context);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +108,7 @@ class HomePage extends StatelessWidget {
                       /// search bar
                       InkWell(
                         onTap: () {
-                          //navigateTo(context, SearchScreen());
+                          Navigator.pushNamed(context, SearchScreen.routName);
                         },
                         child: Container(
                           padding: EdgeInsets.fromLTRB(12, 14, 26, 10),
@@ -107,7 +123,7 @@ class HomePage extends StatelessWidget {
                           child: Row(
                             children:[
                               const Image(
-                                image: AssetImage('assets/images/search.png'),
+                                image: AssetImage('assets/images/searchIcon.jpg'),
                               ),
                               SizedBox(
                                 width: 3.w,
@@ -494,7 +510,17 @@ Widget customJobsList(list, BuildContext context) {
       ),
       SizedBox(
         height: 2.h,
-      )
+      ),
+
     ],
+
   );
+
 }
+
+// Widget customJobsList(list, BuildContext context)
+// {
+//   return Column(
+//
+//   );
+// }

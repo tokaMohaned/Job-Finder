@@ -12,10 +12,12 @@ import 'package:graduationroject/view/registration_and_login/Login.dart';
 import 'package:graduationroject/view/registration_and_login/prefered_location.dart';
 import 'package:graduationroject/view/registration_and_login/register.dart';
 import 'package:graduationroject/view/registration_and_login/work_type.dart';
+import 'package:graduationroject/view/search_screen/searchScreen.dart';
+import 'package:graduationroject/view/search_screen/search_view_filter.dart';
 import 'package:graduationroject/view/splash_and_onboard/OnBoard.dart';
 import 'package:graduationroject/view/pages/reset_password/change_password.dart';
 import 'package:graduationroject/view/pages/reset_password/forget_password.dart';
-import 'package:graduationroject/view/pages/home/homeScreen.dart';
+import 'package:graduationroject/view/pages/home/BottomNavBar.dart';
 import 'package:graduationroject/view/pages/reset_password/main_emailAdress.dart';
 import 'package:graduationroject/view/pages/reset_password/reset_password.dart';
 import 'package:graduationroject/view/splash_and_onboard/splash.dart';
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
               // theme: ThemeData(
               //   primarySwatch: Colors.blue,
               // ),
-              initialRoute: LoginScreen.routName, //first page will appear
+              initialRoute: HomePage.routName, //first page will appear
               routes: {
                 // test.routName:(context)=>test(),
 
@@ -72,15 +74,17 @@ class MyApp extends StatelessWidget {
                 RegitrationScreen.routName: (context) => RegitrationScreen(),
                 Register_Done_page.routName: (context) => Register_Done_page(),
 
-                LoginScreen.routName: (context) => LoginScreen(),
-
-                HomeScreen.routName: (context) => HomeScreen(),
-                HomePage.routName: (context) => HomeScreen(),
-
-
-
                 Work_Type.routName: (context) => Work_Type(),
                 Prefered_location.routName: (context) => Prefered_location(),
+
+
+                LoginScreen.routName: (context) => LoginScreen(),
+
+                BottomNavBar.routName: (context) => BottomNavBar(),
+                HomePage.routName: (context) => HomePage(),
+
+
+
 
                 ForgetPassword.routName: (context) => ForgetPassword(),
                 ForgetPasswordDone_page.routName: (context) =>
@@ -90,6 +94,11 @@ class MyApp extends StatelessWidget {
 
                 MainEmailAdress.routName: (context) => MainEmailAdress(),
                 ChangePassword.routName: (context) => ChangePassword(),
+
+                SearchScreen.routName: (context) => SearchScreen(),
+                SearchViewFilter.routName: (context) => SearchViewFilter(),
+
+
 
 
               },

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduationroject/view/pages/home/home.dart';
 
 import '../../customeWidget/Done_page.dart';
-import '../home/homeScreen.dart';
+import '../home/BottomNavBar.dart';
 
 class DoneResetPass extends StatelessWidget {
   static const String routName = "DoneResetPass";
@@ -20,7 +21,7 @@ class DoneResetPass extends StatelessWidget {
         title2:"Your password has been changed successfully, we will let you know if there are more problems with your account" ,
         titleButton: "open email app",
         onTap: (){
-          Navigator.pushNamed(context, HomeScreen.routName);
+          Navigator.pushNamed(context, BottomNavBar.routName);
         },
 
 

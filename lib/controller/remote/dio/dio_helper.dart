@@ -43,6 +43,7 @@ class DioHelper {
    return response;
   }
   catch(error){
+    print(error);
     throw error;
   }
   }//get

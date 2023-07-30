@@ -48,3 +48,4 @@ class DefaultText extends StatelessWidget
     );
   }
 }
+

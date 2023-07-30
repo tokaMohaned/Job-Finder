@@ -13,7 +13,7 @@ import '../../utilites/enums.dart';
 import '../customeWidget/defaulit_form_field.dart';
 import '../customeWidget/main_button.dart';
 import 'Login.dart';
-import '../pages/home/homeScreen.dart';
+import '../pages/home/BottomNavBar.dart';
 
 class RegitrationScreen extends StatefulWidget {
   // RegitrationScreen({Key? key}) : super(key: key);
@@ -59,20 +59,21 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
           if(formKey.currentState!.validate())
             {
               cubit.register(name,email, password,context);
+              print("done");
             }
-          else{
-            showDialog(context: context, builder: (context)=>
-            AlertDialog(
-              title: Text('error'),
-              content: Text('username or password is worng'),
-              actions: [
-                TextButton(onPressed:()
-                {Navigator.pop(context);},
-                    child: Text('ok')),
-              ],
-            )
-            );
-          }
+          // else{
+          //   showDialog(context: context, builder: (context)=>
+          //   AlertDialog(
+          //     title: Text('error'),
+          //     content: Text('username or password is worng'),
+          //     actions: [
+          //       TextButton(onPressed:()
+          //       {Navigator.pop(context);},
+          //           child: Text('ok')),
+          //     ],
+          //   )
+          //   );
+          // }
         }
         return Scaffold(
           appBar: AppBar(
@@ -281,18 +282,21 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
 
                       MainButton(
                         onTap: () {
-                          register(userNameController.text, emailController.text, passwordController.text);
 
 
-                          if (formKey.currentState!.validate()) {
-                            MyCache.putString(
-                                key: MyCacheKeys.email,
-                                value: emailController.text);
-                            MyCache.putString(
-                                key: MyCacheKeys.password,
-                                value: passwordController.text);
-                          }
-                          Navigator.pushNamed(context, Work_Type.routName);
+                          // if (formKey.currentState!.validate()) {
+                          //   MyCache.putString(
+                          //       key: MyCacheKeys.email,
+                          //       value: emailController.text);
+                          //   MyCache.putString(
+                          //       key: MyCacheKeys.password,
+                          //       value: passwordController.text);
+                          //   Navigator.pushNamed(context, Work_Type.routName);
+                          //
+                          // }
+                          register(userNameController.text,
+                              emailController.text, passwordController.text);
+
                           print(emailController);
                         },
                         text: 'Create account',
@@ -356,41 +360,41 @@ class _RegitrationScreenState extends State<RegitrationScreen> {
     );
   }
 
-  checkConnectivity(BuildContext context) async
-  {
-    var result=await Connectivity().checkConnectivity();
-    print('connection type => ${result.name}');
-    if(result.name!= 'none')
-    {
-
-    }
-    else{
-      internetConnection(context);
-    }
-  }
-
-  void internetConnection(context)
-  {
-    final scaffold= ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(SnackBar(
-      content: Text('No internet connction',
-        style:TextStyle(fontSize: 12.sp) , ),
-      action: SnackBarAction(label: 'ok',onPressed: scaffold.hideCurrentSnackBar,),
-
-    ));
-  }
 
 
 }
-void showToastWhenRegister(context)
+void showToastWhenRegister(context, error)
 {
   final scaffold= ScaffoldMessenger.of(context);
   scaffold.showSnackBar(SnackBar(
-    content: Text('email or password is not valid',
+    content: Text('email or password is not valid or $error',
       style: TextStyle(fontSize: 12.sp),),
     action: SnackBarAction(
       label: 'ok',
       onPressed: scaffold.hideCurrentSnackBar,
     ),
+  ));
+}
+checkConnectivity(BuildContext context) async
+{
+  var result=await Connectivity().checkConnectivity();
+  print('connection type => ${result.name}');
+  if(result.name!= 'none')
+  {
+
+  }
+  else{
+    internetConnection(context);
+  }
+}
+
+void internetConnection(context)
+{
+  final scaffold= ScaffoldMessenger.of(context);
+  scaffold.showSnackBar(SnackBar(
+    content: Text('No internet connction',
+      style:TextStyle(fontSize: 12.sp) , ),
+    action: SnackBarAction(label: 'ok',onPressed: scaffold.hideCurrentSnackBar,),
+
   ));
 }

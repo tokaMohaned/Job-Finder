@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../controller/logic/cubit/job_cubit.dart';
 import '../../../controller/logic/cubit/job_state.dart';
 
-class HomeScreen extends StatelessWidget {//this class for bottomNavigation bar of home
-  static const String routName = "HomeScreen";
+//this class for bottomNavigation bar of home
+class BottomNavBar extends StatelessWidget {
+  static const String routName = "HomeScreenBottomNavBar";
 
   @override
   Widget build(BuildContext context) {

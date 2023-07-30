@@ -6,7 +6,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:graduationroject/controller/remote/dio/dio_helper.dart';
-import 'package:graduationroject/view/pages/home/homeScreen.dart';
+import 'package:graduationroject/view/pages/home/BottomNavBar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../model/job_model.dart';
@@ -16,7 +16,9 @@ import '../../../view/pages/screens/contact_page.dart';
 import '../../../view/pages/screens/profile.dart';
 import '../../../view/pages/screens/saved_jobs.dart';
 import '../../../view/registration_and_login/register.dart';
+import '../../../view/registration_and_login/work_type.dart';
 import '../../local/sharedPreference.dart';
+import '../../remote/http_helper.dart';
 import 'job_state.dart';
 
 class JobCubit extends Cubit<JobsStates> {
@@ -67,17 +69,29 @@ class JobCubit extends Cubit<JobsStates> {
   }
   /////////////////////////////////////////
 //git the jobs
+//   List<JobModel> jobsList = [];
+//   Future<List> getAllJobs() async {
+//
+//     List<dynamic> dataDio=await DioHelper.getData
+//       (url:'http:/167.71.79.133/api/jobs');
+//     //List<dynamic> data = await Api().get(url:'http://167.71.79.133/api/jobs');
+//     List<JobModel> jobs = dataDio.map((job) =>
+//         JobModel.fromJson(job)).toList();
+//
+//     jobsList = jobs;
+//     emit(GetJobsSuccessState());
+//     return dataDio;
+//   }
+
   List<JobModel> jobsList = [];
   Future<List> getAllJobs() async {
-
-    List<dynamic> dataDio=await DioHelper.getData(url: 'http:/167.71.79.133/api/jobs');
-    //List<dynamic> data = await Api().get(url:'http://167.71.79.133/api/jobs');
-    List<JobModel> jobs = dataDio.map((job) =>
+    List<dynamic> data = await Api().get(url:'http://167.71.79.133/api/jobs');
+    List<JobModel> jobs = data.map((job) =>
         JobModel.fromJson(job)).toList();
 
     jobsList = jobs;
     emit(GetJobsSuccessState());
-    return dataDio;
+    return data;
   }
   /////////////////////////////////////////////////
 //log in
@@ -87,18 +101,17 @@ class JobCubit extends Cubit<JobsStates> {
   final dioHelper=DioHelper();
 
     Future<void> login(email,password,context) async {
-    String url = " http://167.71.79.133/api/auth/login";
+    String url = "http://167.71.79.133/api/auth/login";
     emit(loginLoadingsState());
     try{
-    Response response;
-    var dio = Dio();
-    response = await dio.post(url, data: {"password": password, "email": email,});
+    Response response = await dioHelper.postData(url: url,
+        data: {"email": email,"password": password});
     MyCache.saveData(key: 'token', value: response.data['token']);
     MyCache.saveData(key: 'id', value: response.data['user']['id']);
     MyCache.saveData(key: 'name', value: response.data['user']['name']);
    name=MyCache.getData(key: 'name')!;
    emit(LoginSuccessState());
-   Navigator.pushReplacementNamed(context, HomeScreen.routName);
+   Navigator.pushReplacementNamed(context, BottomNavBar.routName);
    getAllJobs();
 
 }
@@ -106,6 +119,7 @@ catch(error)
     {
       showToast(context);
       emit(LoginErrorState());
+      print(error);
     }
     // if (response.statusCode==401){
     //   showToast(context);
@@ -139,27 +153,34 @@ void showToast( context) {
             'email': email,
             'password':password},);
       emit(RegisterSeccessState());
+      Navigator.pushNamed(context, Work_Type.routName);
+      print("register success");
     }
     catch(error)
     {
-      showToastWhenRegister(context);
+      if(error==401)
+        {
+          error=="email is registered";
+        }
+      showToastWhenRegister(context, error);
+      print(error);
       emit(RegisterErrorState());
     }
   }
 ////////
-  void showRegisterToast(context)
-  {
-    final scaffold=ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      SnackBar(content: Text('email or password is invalid',style:
-        TextStyle(
-          fontSize: 13.sp),),
-      action: SnackBarAction(
-          label: 'ok',
-        onPressed: scaffold.hideCurrentSnackBar,
-      )
-    ));
-  }
+//   void showRegisterToast(context)
+//   {
+//     final scaffold=ScaffoldMessenger.of(context);
+//     scaffold.showSnackBar(
+//       SnackBar(content: Text('email or password is invalid',style:
+//         TextStyle(
+//           fontSize: 13.sp),),
+//       action: SnackBarAction(
+//           label: 'ok',
+//         onPressed: scaffold.hideCurrentSnackBar,
+//       )
+//     ));
+//   }
   //////////////  saved job
   var newJobId;
   Future<void> saveJobs(jobId, id , token) async

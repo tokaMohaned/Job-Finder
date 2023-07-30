@@ -13,7 +13,7 @@ import '../customeWidget/customtTextFormField.dart';
 import '../customeWidget/defaulit_form_field.dart';
 import '../customeWidget/main_button.dart';
 import 'register.dart';
-import '../pages/home/homeScreen.dart';
+import '../pages/home/BottomNavBar.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = "loginScreen";
@@ -62,8 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
             cubit.login(email, password, context);
             var id = MyCache.getData(key: 'id')!;
             cubit.getSavedJobes(id);
+            print(emailController);
           }
-          else showToast(context);
+          // else showToast(context);
         }
 
         return Scaffold(
@@ -260,7 +261,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     child:
                     MainButton(
                       onTap: () {
-                        login(emailController.text, passwordController.text);
                         // if (formKey.currentState!.validate()) {
                         //   MyCache.putString(
                         //       key: MyCacheKeys.name,
@@ -268,9 +268,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         //   MyCache.putString(
                         //       key: MyCacheKeys.password,
                         //       value: passwordController.text);
+                        //   Navigator.pushNamed(context, HomeScreen.routName);
+                        //
                         // }
-                        Navigator.pushReplacementNamed(context, HomeScreen.routName);
-                        //print(emailController);
+                        login(emailController.text, passwordController.text);
+
+                        print(emailController);
                       },
                       text: 'Login',
                     ),
