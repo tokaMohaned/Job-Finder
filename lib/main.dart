@@ -8,6 +8,7 @@ import 'package:graduationroject/view/pages/Done_pages/forget_password_done_page
 import 'package:graduationroject/view/pages/Done_pages/register_don_page.dart';
 import 'package:graduationroject/view/pages/Done_pages/reset_done.dart';
 import 'package:graduationroject/view/pages/home/home.dart';
+import 'package:graduationroject/view/pages/home/home_view.dart';
 import 'package:graduationroject/view/registration_and_login/Login.dart';
 import 'package:graduationroject/view/registration_and_login/prefered_location.dart';
 import 'package:graduationroject/view/registration_and_login/register.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
               // theme: ThemeData(
               //   primarySwatch: Colors.blue,
               // ),
-              initialRoute: HomePage.routName, //first page will appear
+              initialRoute: LoginScreen.routName, //first page will appear
               routes: {
                 // test.routName:(context)=>test(),
 
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
                 BottomNavBar.routName: (context) => BottomNavBar(),
                 HomePage.routName: (context) => HomePage(),
 
+                HomeView.routName: (context) => HomeView(),
 
 
 

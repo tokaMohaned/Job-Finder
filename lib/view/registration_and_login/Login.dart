@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduationroject/controller/logic/cubit/job_cubit.dart';
+import 'package:graduationroject/view/pages/home/home_view.dart';
 import 'package:graduationroject/view/pages/reset_password/forget_password.dart';
 import 'package:sizer/sizer.dart';
 import '../../controller/local/sharedPreference.dart';
@@ -261,6 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child:
                     MainButton(
                       onTap: () {
+
                         // if (formKey.currentState!.validate()) {
                         //   MyCache.putString(
                         //       key: MyCacheKeys.name,
@@ -272,6 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         //
                         // }
                         login(emailController.text, passwordController.text);
+                        Navigator.pushNamed(context, HomeView.routName);
 
                         print(emailController);
                       },

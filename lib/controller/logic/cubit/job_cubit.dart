@@ -6,6 +6,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:graduationroject/controller/remote/dio/dio_helper.dart';
+import 'package:graduationroject/controller/remote/dio/endPoint.dart';
 import 'package:graduationroject/view/pages/home/BottomNavBar.dart';
 import 'package:sizer/sizer.dart';
 
@@ -85,7 +86,8 @@ class JobCubit extends Cubit<JobsStates> {
 
   List<JobModel> jobsList = [];
   Future<List> getAllJobs() async {
-    List<dynamic> data = await Api().get(url:'http://167.71.79.133/api/jobs');
+    List<dynamic> data = await Api().get(url:'https://project2.amit-learning.com/api/jobs');
+      //(url:'http://167.71.79.133/api/jobs');
     List<JobModel> jobs = data.map((job) =>
         JobModel.fromJson(job)).toList();
 
@@ -101,7 +103,7 @@ class JobCubit extends Cubit<JobsStates> {
   final dioHelper=DioHelper();
 
     Future<void> login(email,password,context) async {
-    String url = "http://167.71.79.133/api/auth/login";
+    String url = "https://project2.amit-learning.com/api/auth/login";
     emit(loginLoadingsState());
     try{
     Response response = await dioHelper.postData(url: url,
@@ -145,7 +147,7 @@ void showToast( context) {
 ////////////////////////register
   Future<void> register(name, email,password,context)async
   {
-    String url="http://167.71.79.133/api/auth/register";
+    String url="https://project2.amit-learning.com/api/auth/register";
     try{
       Response response=await dioHelper.postData(url: url,
            data: {
@@ -185,7 +187,7 @@ void showToast( context) {
   var newJobId;
   Future<void> saveJobs(jobId, id , token) async
   {
-    String url="http://167.71.79.133/api/favorites";
+    String url="https://project2.amit-learning.com/api/favorites";
     var dio=Dio();
     try{
       Response response=await dio.post(url,data:{'job_id': jobId, 'user_id': id});
@@ -201,13 +203,27 @@ void showToast( context) {
     }
   }
   ///////////get saved jobs list
-  List<JobModel> saveJobList=[];
-  Future <List> getSavedJobes(id) async
-  {
-    List<dynamic> data= await DioHelper.getData(url: 'http://167.71.79.133/api/favorites/$id');
-    List<JobModel> jobs=
-    data.map((job) => JobModel.fromJson(job)).toList();
-    saveJobList=jobs;
+  // List<JobModel> saveJobList=[];
+  // Future <List> getSavedJobes(id) async
+  // {
+  //   Response<dynamic> data= await DioHelper.getData(url:("https://project2.amit-learning.com/api/favorites/$id"));
+  //   print(id);
+  //
+  //
+  //   //'https://project2.amit-learning.com/api/favorites/$id');
+  //   List<JobModel> jobs=
+  //   data.map((job) => JobModel.fromJson(job)).toList();
+  //   saveJobList=jobs;
+  //   emit(GetSavedJobsSeccessState());
+  //   return jobs;
+  // }
+
+  List<JobModel> savedJobsList = [];
+  Future<List> getSavedJobes(id) async {
+    List<dynamic> data = await Api().get(url:'https://project2.amit-learning.com/api/favorites/$id');
+    List<JobModel> jobs = data.map((job) =>
+        JobModel.fromJson(job)).toList();
+    savedJobsList = jobs;
     emit(GetSavedJobsSeccessState());
     return jobs;
   }

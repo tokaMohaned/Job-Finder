@@ -1,45 +1,44 @@
-//import 'package:conditional_builder/conditional_builder.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc/bloc.dart';
+
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:graduationroject/controller/logic/cubit/job_state.dart';
-import 'package:graduationroject/view/search_screen/searchScreen.dart';
+import 'package:easy_stepper/easy_stepper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduationroject/utilites/AppAssets.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../controller/local/sharedPreference.dart';
 import '../../../controller/logic/cubit/job_cubit.dart';
+import '../../../controller/logic/cubit/job_state.dart';
+import '../../customeWidget/constats.dart';
+import '../../job_details/job_details_view.dart';
+import '../../notification/notification.dart';
 import '../../registration_and_login/register.dart';
-import 'BottomNavBar.dart';
+import '../../search_screen/searchScreen.dart';
 
-//
-class HomePage extends StatefulWidget {
-  static const String routName = "HomePage";
-
+class HomeView extends StatefulWidget {
+   static const String routName='HomeView';
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeViewState extends State<HomeView> {
   // HomeScreen({Key? key}) : super(key: key);
   var list = [];
+  var name;
+  bool _isSaved = false;
 
-  var name ;
-  bool isSaved=false;
-
-  void initState()
-  {
+  @override
+  void initState() {
+    // TODO: implement initState
     super.initState();
     checkConnectivity(context);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<JobCubit, JobsStates>(
-        listener: (context, state) {   },
+        listener: (context, state) {},
         builder: (context, state) {
-
           var cubit = JobCubit.get(context);
           list = cubit.jobsList;
           name = cubit.name;
@@ -71,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     textAlign: TextAlign.start,
                                   ),
-                                  SizedBox(height: 3.h,),
+                                  SizedBox(height: 3.h),
                                   Text(
                                     'Create a better future for yourself here',
                                     style: TextStyle(
@@ -96,10 +95,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                             child: IconButton(
                                 onPressed: () {
-                                 // navigateTo(context,  NotificationPage());
-                                //  Navigator.pushNamed(context, NotificationPage)
+                                  Navigator.push(context, MaterialPageRoute(builder:(context)=> NotificationPage()));
+                                  //navigateTo(context, const NotificationPage());
                                 },
-                                icon: const Icon(Icons.notifications_none_outlined)),
+                                icon: const Icon(
+                                    Icons.notifications_none_outlined)),
                           ),
                           //image: AssetImage('assets/images/ring.png')
                         ],
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                       /// search bar
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, SearchScreen.routName);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
                         },
                         child: Container(
                           padding: EdgeInsets.fromLTRB(12, 14, 26, 10),
@@ -121,10 +121,8 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(100),
                           ),
                           child: Row(
-                            children:[
-                              const Image(
-                                image: AssetImage('assets/images/searchIcon.jpg'),
-                              ),
+                            children: [
+                              Image.asset(AppAssets.searchIcon),
                               SizedBox(
                                 width: 3.w,
                               ),
@@ -141,14 +139,14 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             'Suggested Job',
-                            style: TextStyle(fontSize: 14.sp,),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                            ),
                           ),
                           const Spacer(),
                           TextButton(
                             onPressed: () {
-
                               print(cubit.name);
-
                             },
                             child: Text(
                               'View all',
@@ -159,7 +157,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 1.h,),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+
                       /// card
                       SizedBox(
                         width: double.infinity,
@@ -171,22 +172,26 @@ class _HomePageState extends State<HomePage> {
                               // padding: EdgeInsets.only(left: 16,right: 6),
                               physics: BouncingScrollPhysics(),
                               separatorBuilder: (context, index) =>
-                                  SizedBox(width: 8.w,),
+                                  SizedBox(
+                                    width: 8.w,
+                                  ),
                               itemCount: list.length,
                               itemBuilder: (context, index) => InkWell(
                                 onTap: () {
-                                  //Navigator.push(context, JobDetail(jobsindex:index));
-                                  //Navigator.push(context, MaterialPageRoute(builder: JobDetail(jobsindex: index,)))
+                                  Navigator.push(
+                                      context, MaterialPageRoute(builder: (context)=>JobDetail(jobsindex: index)));
                                 },
-                                child:
-                                customSuggestedJobsList(list[index], context),
+                                child: customSuggestedJobsList(
+                                    list[index], context),
                               ),
                               //list[index]
                             ),
                             fallback: (context) => const Center(
                                 child: CircularProgressIndicator())),
                       ),
-                      SizedBox(height: 2.h,),
+                      SizedBox(
+                        height: 2.h,
+                      ),
 
                       /// recent job & view all
                       Row(
@@ -202,12 +207,16 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {},
                             child: Text(
                               'View all',
-                              style: TextStyle(fontSize: 11.sp,),
+                              style: TextStyle(
+                                fontSize: 11.sp,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 1.h,),
+                      SizedBox(
+                        height: 1.h,
+                      ),
                       SizedBox(
                         height: 30.h,
                         child: ConditionalBuilder(
@@ -215,20 +224,15 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => ListView.separated(
                               physics: BouncingScrollPhysics(),
                               separatorBuilder: (context, index) =>
-                              Container(
-                                width: double.infinity,
-                                height: 4,
-                                color: Colors.grey[300],
-                              ),
+                                  defaultSeparatorContainer(),
                               itemCount: list.length,
-                              itemBuilder: (context, index) =>
-                                  InkWell(
-                                    onTap: () {
-                                      //navigateTo(context, JobDetail(jobsindex:index));
-                                    },
-                                    child:
-                                    customJobsList(list[index], context),
-                                  ),
+                              itemBuilder: (context, index) => InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context, MaterialPageRoute(builder: (context)=>JobDetail(jobsindex: index)));
+                                },
+                                child: customJobsList(list[index], context),
+                              ),
                             ),
                             fallback: (context) => const Center(
                                 child: CircularProgressIndicator())),
@@ -252,16 +256,14 @@ Widget customSuggestedJobsList(list, BuildContext context) {
         color: Colors.grey,
       ),
       borderRadius: BorderRadius.circular(15),
-      color: Color(0xFF091A7A),
+      color: Colors.blue,
     ),
     child: Column(
       children: [
         Flexible(
           flex: 1,
           child: ListTile(
-            leading: const Image(
-              image: AssetImage('assets/images/logo_amit.png'),
-            ),
+            leading: Image.asset(AppAssets.twitterIcon,),
             title: Text(
               '${list.name}',
               style: TextStyle(fontSize: 13.sp, color: Colors.white),
@@ -273,7 +275,7 @@ Widget customSuggestedJobsList(list, BuildContext context) {
               textAlign: TextAlign.start,
             ),
             trailing: const Image(
-              image: AssetImage('assets/images/save.png'),
+              image: AssetImage(AppAssets.saveFilled),
             ),
           ),
         ),
@@ -319,8 +321,8 @@ Widget customSuggestedJobsList(list, BuildContext context) {
                     child: Center(
                       child: Text(
                         'Onsite',
-                        style: TextStyle(
-                            fontSize: 9.sp, color: Color(0xFFFFFFFF)),
+                        style:
+                        TextStyle(fontSize: 9.sp, color: Color(0xFFFFFFFF)),
                         textAlign: TextAlign.start,
                       ),
                     ),
@@ -382,8 +384,8 @@ Widget customSuggestedJobsList(list, BuildContext context) {
                           onTap: () {},
                           child: Text(
                             'Apply now',
-                            style: TextStyle(
-                                fontSize: 9.sp, color: Colors.white),
+                            style:
+                            TextStyle(fontSize: 9.sp, color: Colors.white),
                           ),
                         ),
                       ),
@@ -398,16 +400,13 @@ Widget customSuggestedJobsList(list, BuildContext context) {
     ),
   );
 }
-
 Widget customJobsList(list, BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       ListTile(
-        leading: const Image(
-          image: AssetImage('assets/images/logo_amit.png'),
-        ),
+        leading: Image.asset(AppAssets.twitterIcon,),
         title: Text(
           '${list.name}',
           style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
@@ -420,108 +419,224 @@ Widget customJobsList(list, BuildContext context) {
           textAlign: TextAlign.start,
         ),
         trailing: GestureDetector(
-          onTap: () {},
-          child: const Image(
-            image: AssetImage('assets/images/save3.png'),
-          ),
+          onTap: () {
+            var token = MyCache.getData(key: 'token')!;
+            var id = MyCache.getData(key: 'id')!;
+
+            JobCubit.get(context).saveJobs(list.id, id, token);
+            // JobsCubit.get(context).getSavedJobs(id);
+          },
+          child: Image.asset(AppAssets.saveFilled,),
         ),
       ),
-      SizedBox(
-        height: 12,
-      ),
+      SizedBox(height: 2.h,),
       Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFD6E4FF),
+          Row(
+            children: [
+              Container(
+                width: 70,
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
                   ),
-                  child: Center(
-                    child: Text(
-                      '${list.jobTimeType}',
-                      style: TextStyle(
-                        fontSize: 9.sp,
-                      ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color(0xFFD6E4FF),
+                ),
+                child: Center(
+                  child: Text(
+                    '${list.jobTimeType}',
+                    style: TextStyle(
+                      fontSize: 9.sp,
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 6.5,
-                ),
-                Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFD6E4FF),
+              ),
+              SizedBox(width: 2.w,),
+              Container(
+                width: 70,
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
                   ),
-                  child: Center(
-                    child: Text(
-                      'Remote',
-                      style: TextStyle(
-                        fontSize: 9.sp,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color(0xFFD6E4FF),
                 ),
-                SizedBox(
-                  width: 6.5,
+                child: Center(
+                  child: Text('Remote',style: TextStyle(
+                    fontSize: 9.sp,
+                  ),),
                 ),
-                Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFD6E4FF),
+              ),
+              SizedBox(width: 2.w,),
+              Container(
+                width: 70,
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
                   ),
-                  child: Center(
-                    child: Text(
-                      '${list.jobLevel}',
-                      style: TextStyle(
-                        fontSize: 9.sp,
-                      ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color(0xFFD6E4FF),
+                ),
+                child: Center(
+                  child: Text(
+                    '${list.jobLevel}',
+                    style: TextStyle(
+                      fontSize: 9.sp,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Spacer(),
           Text(
             '\$${list.salary}/Month',
             style: TextStyle(fontSize: 10.sp),
           ),
         ],
       ),
-      SizedBox(
-        height: 2.h,
-      ),
-
+      SizedBox(height: 2.h,)
     ],
-
   );
-
 }
 
-// Widget customJobsList(list, BuildContext context)
-// {
-//   return Column(
-//
+// Widget customSuggestedJobsListShimmer() {
+//   return Shimmer.fromColors(
+//     baseColor: Colors.red,
+//     highlightColor: Colors.yellow,
+//     child: Container(
+//       height: 183,
+//       width: 300,
+//       decoration: BoxDecoration(
+//         border: Border.all(
+//           color: Colors.grey,
+//         ),
+//         borderRadius: BorderRadius.circular(15),
+//         color: Colors.white,
+//       ),
+//       child: Column(
+//         children: [
+//           Flexible(
+//             flex: 1,
+//             child: ListTile(
+//               leading: Container(color: Colors.white,),
+//               title: Container(color: Colors.blue,),
+//               subtitle: Container(color: Colors.white,),
+//               trailing: Container(color: Colors.white,),
+//             ),
+//           ),
+//           Flexible(
+//             flex: 1,
+//             child: Center(
+//               child: Padding(
+//                 padding: const EdgeInsets.only(right: 8, left: 8),
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Container(
+//                       width: 87,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                         border: Border.all(
+//                           color: Colors.grey,
+//                         ),
+//                         borderRadius: BorderRadius.circular(20),
+//                         color: Colors.white.withOpacity(0.15),
+//                       ),
+//                       child: Center(
+//                         child: Container(color: Colors.white,),
+//                       ),
+//                     ),
+//                     SizedBox(
+//                       width: 6.5,
+//                     ),
+//                     Container(
+//                       width: 87,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                         border: Border.all(
+//                           color: Colors.grey,
+//                         ),
+//                         borderRadius: BorderRadius.circular(20),
+//                         color: Colors.white.withOpacity(0.15),
+//                       ),
+//                       child: Center(
+//                         child: Container(color: Colors.white,),
+//                       ),
+//                     ),
+//                     SizedBox(
+//                       width: 6.5,
+//                     ),
+//                     Container(
+//                       width: 87,
+//                       height: 30,
+//                       decoration: BoxDecoration(
+//                         border: Border.all(
+//                           color: Colors.grey,
+//                         ),
+//                         borderRadius: BorderRadius.circular(20),
+//                         color: Colors.white.withOpacity(0.15),
+//                       ),
+//                       child: Center(
+//                         child: Container(color: Colors.white,),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//           Flexible(
+//             flex: 1,
+//             child: Container(
+//               child: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Row(
+//                   children: [
+//                     Container(color: Colors.white,),
+//                     Spacer(),
+//                     // apply job
+//                     InkWell(
+//                       onTap: () {},
+//                       child: Container(
+//                         width: 96,
+//                         height: 32,
+//                         decoration: BoxDecoration(
+//                           border: Border.all(
+//                             color: Colors.grey,
+//                           ),
+//                           borderRadius: BorderRadius.circular(20),
+//                           color: const Color(0xFF3366FF),
+//                         ),
+//                         child: Center(
+//                           child: Container(color: Colors.white,),
+//                           ),
+//                         ),
+//                       ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
 //   );
 // }
+
+
+// IconButton(
+// icon: Icon(
+// _isSaved ? Icons.bookmark : Icons.bookmark_outline,size: 36,
+// color: _isSaved ? Colors.blue : Colors.grey, // Set color based on isSaved state
+// ),
+// onPressed: () {
+// setState(() {
+// _isSaved = !_isSaved; // Toggle isSaved state on button click
+// });
+// },
+// ),

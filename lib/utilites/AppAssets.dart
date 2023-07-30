@@ -36,6 +36,9 @@ class AppAssets{
   static const String saudiArabia = 'assets/images/saudiArabia.png';
   static const String singapore = 'assets/images/singapore.png';
 
+//search
+
+  static const String searchIcon = "assets/images/searchIcon.jpg";
 
 //search filter
   static const String jobTitleIcon = 'assets/images/briefcase.png';
