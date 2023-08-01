@@ -8,14 +8,17 @@ import 'package:graduationroject/view/pages/Done_pages/forget_password_done_page
 import 'package:graduationroject/view/pages/Done_pages/register_don_page.dart';
 import 'package:graduationroject/view/pages/Done_pages/reset_done.dart';
 import 'package:graduationroject/view/pages/home/home.dart';
+import 'package:graduationroject/view/pages/home/home_view.dart';
 import 'package:graduationroject/view/registration_and_login/Login.dart';
 import 'package:graduationroject/view/registration_and_login/prefered_location.dart';
 import 'package:graduationroject/view/registration_and_login/register.dart';
 import 'package:graduationroject/view/registration_and_login/work_type.dart';
+import 'package:graduationroject/view/search_screen/searchScreen.dart';
+import 'package:graduationroject/view/search_screen/search_view_filter.dart';
 import 'package:graduationroject/view/splash_and_onboard/OnBoard.dart';
 import 'package:graduationroject/view/pages/reset_password/change_password.dart';
 import 'package:graduationroject/view/pages/reset_password/forget_password.dart';
-import 'package:graduationroject/view/pages/home/homeScreen.dart';
+import 'package:graduationroject/view/pages/home/BottomNavBar.dart';
 import 'package:graduationroject/view/pages/reset_password/main_emailAdress.dart';
 import 'package:graduationroject/view/pages/reset_password/reset_password.dart';
 import 'package:graduationroject/view/splash_and_onboard/splash.dart';
@@ -48,13 +51,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => JobCubit()..getAllJobs(),
+      create: (_) => JobCubit()..currentIndexs,
       //2 dots mean i make obj and call function
       child: Sizer(
           builder: (context, orientation, deviceType) {
             return MaterialApp(
+              //useInheritedMediaQuery: true,
+             locale: DevicePreview.locale(context),
+              builder: DevicePreview.appBuilder,
               debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
+              //title: 'Flutter Demo',
               // theme: ThemeData(
               //   primarySwatch: Colors.blue,
               // ),
@@ -69,15 +75,18 @@ class MyApp extends StatelessWidget {
                 RegitrationScreen.routName: (context) => RegitrationScreen(),
                 Register_Done_page.routName: (context) => Register_Done_page(),
 
-                LoginScreen.routName: (context) => LoginScreen(),
-
-                HomeScreen.routName: (context) => HomeScreen(),
-                HomePage.routName: (context) => HomeScreen(),
-
-
-
                 Work_Type.routName: (context) => Work_Type(),
                 Prefered_location.routName: (context) => Prefered_location(),
+
+
+                LoginScreen.routName: (context) => LoginScreen(),
+
+                BottomNavBar.routName: (context) => BottomNavBar(),
+                HomePage.routName: (context) => HomePage(),
+
+                HomeView.routName: (context) => HomeView(),
+
+
 
                 ForgetPassword.routName: (context) => ForgetPassword(),
                 ForgetPasswordDone_page.routName: (context) =>
@@ -87,6 +96,11 @@ class MyApp extends StatelessWidget {
 
                 MainEmailAdress.routName: (context) => MainEmailAdress(),
                 ChangePassword.routName: (context) => ChangePassword(),
+
+                SearchScreen.routName: (context) => SearchScreen(),
+                SearchViewFilter.routName: (context) => SearchViewFilter(),
+
+
 
 
               },

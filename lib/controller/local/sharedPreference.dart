@@ -20,7 +20,7 @@ class MyCache {
 
   static dynamic getData({required String key})
   {
-    return preferences?.get(key);
+    return preferences?.get(key)?? '';
   }
   static void putString(
       {required MyCacheKeys key, required String value}) async {

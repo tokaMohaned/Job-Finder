@@ -36,10 +36,22 @@ class AppAssets{
   static const String saudiArabia = 'assets/images/saudiArabia.png';
   static const String singapore = 'assets/images/singapore.png';
 
+//search
+
+  static const String searchIcon = "assets/images/searchIcon.jpg";
+
+//search filter
+  static const String jobTitleIcon = 'assets/images/briefcase.png';
+  static const String location = 'assets/images/location.png';
+  static const String dollarIcon = 'assets/images/dollar-circle.png';
+  static const String settingIcon = 'assets/images/setting.png';
+  static const String topLine = 'assets/images/topLine.png';
 
 
+  static const String saveFilled = 'assets/images/saveFilled.png';
+  static const String saveNotFilled = 'assets/images/savedNotFilled.png';
 
-
+  static const String twitterIcon = 'assets/images/twitter.png';
 
 
 

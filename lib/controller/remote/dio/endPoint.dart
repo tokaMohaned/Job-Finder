@@ -1,5 +1,5 @@
 //const baseUrl="134.209.132.80/api/";
-const baseUrl="http://167.71.79.133/api";
+const baseUrl="https://project2.amit-learning.com/api";
 
 const loginEndPoint="auth/login";
 const RegisterEndPoint="auth/register";

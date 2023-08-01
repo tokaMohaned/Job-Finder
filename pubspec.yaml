@@ -50,6 +50,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   flutter_switch: ^0.3.2
   http:
+  connectivity_plus:
   conditional_builder_null_safety:
   auto_size_text:
 

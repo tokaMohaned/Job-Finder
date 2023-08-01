@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../customeWidget/Done_page.dart';
 import '../../registration_and_login/Login.dart';
-import '../home/homeScreen.dart';
+import '../home/BottomNavBar.dart';
 
 class Register_Done_page extends StatelessWidget {
   static const String routName="Register_Done_page";
@@ -20,7 +20,7 @@ class Register_Done_page extends StatelessWidget {
         title2:"We have customized feeds according to your preferences",
         titleButton: "Get Started",
         onTap: (){
-          Navigator.pushNamed(context, LoginScreen.routName);
+          Navigator.pushReplacementNamed(context, BottomNavBar.routName);
         },
 
 

@@ -43,6 +43,7 @@ class DioHelper {
    return response;
   }
   catch(error){
+    print(error);
     throw error;
   }
   }//get
@@ -96,7 +97,8 @@ class DioHelper {
   }
 
 ///////////////////////////////////////get saved jobs
-  static Future<List<jobsModel>> getSavedJobs(int id) async {
+  //here i make request form API to get saved jobs
+  static Future<List<JobModel>> getSavedJobs(int id) async {
       Response response;
       try {
        response = await dio!.get('/favorites/$id');
@@ -110,7 +112,7 @@ class DioHelper {
       }
 
       List<dynamic> data = response.data;
-      List<jobsModel> jobs = data.map((job) => jobsModel.fromJson(job)).toList();
+      List<JobModel> jobs = data.map((job) => JobModel.fromJson(job)).toList();
 
       return jobs;
      }
