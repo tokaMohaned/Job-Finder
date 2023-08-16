@@ -110,7 +110,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     SizedBox(
                       height: 200,
                       child: ConditionalBuilder(
-                        condition: cubit.searchList.isNotEmpty,
+                        condition: cubit.searchList.isEmpty,
                         builder: (context)=>
                         ListView.separated(
                           physics: BouncingScrollPhysics(),

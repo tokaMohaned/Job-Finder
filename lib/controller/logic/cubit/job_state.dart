@@ -24,6 +24,8 @@ class searchState extends JobsStates{}
 
 class GetSavedJobsSeccessState extends JobsStates{}
 
+class deletJobState extends JobsStates{}
+
 
 
 

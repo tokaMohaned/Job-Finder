@@ -50,36 +50,39 @@ class DioHelper {
 
 ///////////post data
    Future<Response> postData
-      ({
-    required String url,
+      (
+     String url,
     //Map<String,dynamic>?queryParameters,//it is optional
    // String? token,//optioanl
-    required Map<String,dynamic> data
+     dynamic data
    // dynamic data,
-  })async
+  )async
   {try{
   // dio.options.headers={
   // 'Autorization':'Bearer ${token ?? " "}'//if there is no token let it empty
   // };
-    dio.options.headers['Authorization']='Bearer ${token ?? " "}';
+    dio.options.headers['Authorization']='Bearer $token';
 
-  Response response=await dio.post(url, data: data,);
+  final response=await dio.post(url, data: data,);
   return response;
   }
   catch(error){
-  throw error;
+    print(error);
+
+    throw error;
   }
   }
   ///////////////put
-  Future <Response>put(String url, dynamic data)async
+  Future <Response> put(String url, dynamic data)async
   {
     try{
-      dio.options.headers['Authorization']='Bearer ${token ?? " "}';
+      dio.options.headers['Authorization']='Bearer $token';
       final response=await dio.put(url, data: data);
       return response;
     }
     catch(error){
-      throw error;
+      print(error);
+      rethrow ;
     }
   }
   ///////////////////////delet

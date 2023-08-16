@@ -7,6 +7,7 @@ class MainButton extends StatelessWidget {
   final VoidCallback onTap;
   final double? height;
   final double? width;
+
   const MainButton({Key? key,required this.text, required this.onTap,  this.height,  this.width}) : super(key: key);
 
   @override
@@ -35,4 +36,9 @@ class MainButton extends StatelessWidget {
       ),
     );
   }
+}
+
+void navigateTo(context, widget)
+{
+  Navigator.push(context, MaterialPageRoute(builder: (context)=> widget));
 }

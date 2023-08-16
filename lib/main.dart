@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduationroject/controller/local/sharedPreference.dart';
 import 'package:graduationroject/controller/logic/cubit/job_cubit.dart';
 import 'package:graduationroject/controller/remote/dio/dio_helper.dart';
+import 'package:graduationroject/view/job_details/job_details_view.dart';
 import 'package:graduationroject/view/pages/Done_pages/forget_password_done_page.dart';
 import 'package:graduationroject/view/pages/Done_pages/register_don_page.dart';
 import 'package:graduationroject/view/pages/Done_pages/reset_done.dart';
@@ -99,6 +100,8 @@ class MyApp extends StatelessWidget {
 
                 SearchScreen.routName: (context) => SearchScreen(),
                 SearchViewFilter.routName: (context) => SearchViewFilter(),
+                
+                //JobDetail.routName:(context)=> JobDetail(jobsindex: null,),
 
 
 

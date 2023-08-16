@@ -8,7 +8,12 @@ import 'package:graduationroject/view/customeWidget/main_button.dart';
 import 'package:graduationroject/view/pages/screens/Job_application.dart';
 import 'package:sizer/sizer.dart';
 
+import '../customeWidget/default_text.dart';
+import '../pages/screens/profile.dart';
+import 'job_details_3custom_tabs.dart';
+
 class JobDetail extends StatelessWidget {
+  static const String routName="JobDetail";
   final int jobsindex;
   var list = [];
 
@@ -37,6 +42,7 @@ class JobDetail extends StatelessWidget {
             actions: [
               Image.asset(AppAssets.saveFilled),],
           ),
+
           body: DefaultTabController(
             length: 3,
             child: Padding(
@@ -58,7 +64,7 @@ class JobDetail extends StatelessWidget {
                           ////////////////////////////////////////////////////////////////////////again
                           SizedBox(height: 3.h),
                           Text(
-                            //'dd',
+
                             '${list[jobsindex].name}',
                             style: TextStyle(
                                 fontSize: 16.sp,
@@ -73,7 +79,7 @@ class JobDetail extends StatelessWidget {
                           SizedBox(height: 2.h,),
                           Center(
                             child: Row(
-                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
                                   child: Container(
@@ -194,24 +200,61 @@ class JobDetail extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        // DescriptionPage(jobsindex: jobsindex,),
-                        // CompanyPage(jobsindex: jobsindex,),
-                        // ProfilePage(),
+                        DescriptionPage(jobsIndex: jobsindex,),
+                        CompanyPage( jobindex: jobsindex,),
+                        People(),
                       ],
                     ),
+
                   ),
+                 // Spacer(flex: 3,),
+
+                  MainButton(text: 'Apply Now',
+                      onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>JobApplication()));
+                    // navigateTo(context,JobApplication() );
+                  }),
+
+          //          ElevatedButton(
+          //           onPressed:  ()
+          //     {
+          //          Navigator.push(context, MaterialPageRoute(builder: (context)=>JobApplication()));
+          // // navigateTo(context,JobApplication() );
+          // },
+          //           style: ElevatedButton.styleFrom(
+          //               backgroundColor: Colors.transparent,
+          //               shape: RoundedRectangleBorder(
+          //                 borderRadius: BorderRadius.circular(1000),
+          //               )
+          //           ),
+          //
+          //           child: Center(
+          //             child: DefaultText(
+          //               text:("log in"),
+          //               fontSize: 14.sp,
+          //               color: Colors.white,
+          //             ),
+          //           ),
+          //         ),
+
+
+
                 ],
               ),
             ),
           ),
-          floatingActionButton: Container(
-              color: Colors.transparent,
-              child: MainButton(text: 'Apply Now', onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>JobApplication()));
-               // navigateTo(context,JobApplication() );
-              })
-          ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+         //  floatingActionButton: Container(
+         //      color: Colors.transparent,
+         //      child: MainButton(text: 'Apply Now', onTap: () {
+         //        Navigator.push(context, MaterialPageRoute(builder: (context)=>JobApplication()));
+         //       // navigateTo(context,JobApplication() );
+         //      })
+         //  ),
+         //
+         // floatingActionButtonLocation:
+         // FloatingActionButtonLocation.centerFloat,
+
+
         );
       });
   }

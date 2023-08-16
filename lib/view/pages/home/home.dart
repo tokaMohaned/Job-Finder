@@ -5,10 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:graduationroject/controller/logic/cubit/job_state.dart';
+import 'package:graduationroject/utilites/AppAssets.dart';
 import 'package:graduationroject/view/search_screen/searchScreen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../controller/logic/cubit/job_cubit.dart';
+import '../../customeWidget/main_button.dart';
+import '../../job_details/job_details_view.dart';
 import '../../registration_and_login/register.dart';
 import 'BottomNavBar.dart';
 
@@ -175,8 +178,8 @@ class _HomePageState extends State<HomePage> {
                               itemCount: list.length,
                               itemBuilder: (context, index) => InkWell(
                                 onTap: () {
-                                  //Navigator.push(context, JobDetail(jobsindex:index));
-                                  //Navigator.push(context, MaterialPageRoute(builder: JobDetail(jobsindex: index,)))
+                                  //Navigator.push(context, JobDetail.routName as Route<Object?>);
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>JobDetail(jobsindex: index)));
                                 },
                                 child:
                                 customSuggestedJobsList(list[index], context),
@@ -224,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (context, index) =>
                                   InkWell(
                                     onTap: () {
-                                      //navigateTo(context, JobDetail(jobsindex:index));
+                                      navigateTo(context, JobDetail(jobsindex:index));
                                     },
                                     child:
                                     customJobsList(list[index], context),
@@ -260,7 +263,7 @@ Widget customSuggestedJobsList(list, BuildContext context) {
           flex: 1,
           child: ListTile(
             leading: const Image(
-              image: AssetImage('assets/images/logo_amit.png'),
+              image: AssetImage(AppAssets.twitterIcon),
             ),
             title: Text(
               '${list.name}',
@@ -273,7 +276,8 @@ Widget customSuggestedJobsList(list, BuildContext context) {
               textAlign: TextAlign.start,
             ),
             trailing: const Image(
-              image: AssetImage('assets/images/save.png'),
+              image: AssetImage(AppAssets.saveNotFilled,),
+              color: Colors.white,
             ),
           ),
         ),
@@ -378,7 +382,7 @@ Widget customSuggestedJobsList(list, BuildContext context) {
                         color: const Color(0xFF3366FF),
                       ),
                       child: Center(
-                        child: GestureDetector(
+                        child: InkWell(
                           onTap: () {},
                           child: Text(
                             'Apply now',
@@ -406,7 +410,7 @@ Widget customJobsList(list, BuildContext context) {
     children: [
       ListTile(
         leading: const Image(
-          image: AssetImage('assets/images/logo_amit.png'),
+          image: AssetImage(AppAssets.twitterIcon),
         ),
         title: Text(
           '${list.name}',
@@ -422,7 +426,7 @@ Widget customJobsList(list, BuildContext context) {
         trailing: GestureDetector(
           onTap: () {},
           child: const Image(
-            image: AssetImage('assets/images/save3.png'),
+            image: AssetImage(AppAssets.saveNotFilled),
           ),
         ),
       ),
@@ -519,9 +523,3 @@ Widget customJobsList(list, BuildContext context) {
 
 }
 
-// Widget customJobsList(list, BuildContext context)
-// {
-//   return Column(
-//
-//   );
-// }

@@ -35,7 +35,7 @@ class JobCubit extends Cubit<JobsStates> {
     ContancePage(),
     JobApplication(),
     SavedJob(),
-    Profile(),
+    ProfilePage(),
   ];
   List<BottomNavigationBarItem> bottomNavItem = [
     BottomNavigationBarItem(
@@ -106,8 +106,8 @@ class JobCubit extends Cubit<JobsStates> {
     String url = "https://project2.amit-learning.com/api/auth/login";
     emit(loginLoadingsState());
     try{
-    Response response = await dioHelper.postData(url: url,
-        data: {"email": email,"password": password});
+    Response response = await dioHelper.postData( url,
+         {"email": email,"password": password});
     MyCache.saveData(key: 'token', value: response.data['token']);
     MyCache.saveData(key: 'id', value: response.data['user']['id']);
     MyCache.saveData(key: 'name', value: response.data['user']['name']);
@@ -149,8 +149,8 @@ void showToast( context) {
   {
     String url="https://project2.amit-learning.com/api/auth/register";
     try{
-      Response response=await dioHelper.postData(url: url,
-           data: {
+      Response response=await dioHelper.postData(url,
+            {
               'name': name,
             'email': email,
             'password':password},);
@@ -185,23 +185,39 @@ void showToast( context) {
 //   }
   //////////////  saved job
   var newJobId;
-  Future<void> saveJobs(jobId, id , token) async
-  {
-    String url="https://project2.amit-learning.com/api/favorites";
-    var dio=Dio();
-    try{
-      Response response=await dio.post(url,data:{'job_id': jobId, 'user_id': id});
-      //Response response = await networkService.postData(url, {'job_id': jobId, 'user_id': id});
-      MyCache.saveData(key: 'newJobId',
-          value: response.data['data']['id']);
-      newJobId=MyCache.getData(key: 'newJobID');
+  // Future<void> saveJobs(jobId, id , token) async
+  // {
+  //   String url="https://project2.amit-learning.com/api/favorites";
+  //   var dio=Dio();
+  //   try{
+  //     Response response=await dio.post(url,data:{'job_id': jobId, 'user_id': id});
+  //     //Response response = await networkService.postData(url, {'job_id': jobId, 'user_id': id});
+  //     MyCache.saveData(key: 'newJobId',
+  //         value: response.data['data']['id']);
+  //     newJobId=MyCache.getData(key: 'newJobID');
+  //
+  //   }
+  //   catch(error)
+  //   {
+  //     print(error.toString());
+  //   }
+  // }
 
-    }
-    catch(error)
-    {
-      print(error.toString());
+
+  Future<void> saveJobs(jobId, id, token) async {
+    String url = "https://project2.amit-learning.com/api/favorites";
+    // var dio = Dio();
+    try {
+      Response response = await dioHelper.postData(
+          url, {'job_id': jobId, 'user_id': id});
+
+      MyCache.saveData(key: 'newJobId', value: response.data['data']['id']);
+      newJobId = MyCache.getData(key: 'newJobId')!;
+    }catch(e){
+      print(e.toString());
     }
   }
+
   ///////////get saved jobs list
   // List<JobModel> saveJobList=[];
   // Future <List> getSavedJobes(id) async
@@ -228,7 +244,32 @@ void showToast( context) {
     return jobs;
   }
   //////////deletJob
+Future<void> deleteJob(jobId,token )async{
+    String url="https://project2.amit-learning.com/api/favorites/$jobId";
+    try{
+      emit(deletJobState());
+      Response response=await DioHelper.dio.delete(url);
+    }
+    catch(error)
+  {
+    print(error.toString());
+  }
+}
 /////////////////edit profile
+  dynamic dio=DioHelper();
+  Future<Response?> editProfile(token,userID, String name,
+      String bio, String address , String mobile) async{
+    try{
+      Response response=await dio.put(
+        'https://project2.amit-learning.com/api/user/profile/edit/${userID}',
+          { 'bio': bio, 'address': address, 'mobile': mobile, 'name': name}
+      );
+    }
+    catch(error)
+    {
+      print(error.toString());
+    }
+  }
 /////////////////////updateProfile
 /////////////////////searchList
   List<JobModel> searchList = [];
